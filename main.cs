@@ -5,13 +5,22 @@ using System.Linq;
 
 class Program {
 
-    static string path = "passw.csv";
+    static string competitorPath, passwPath;
+
+    
     
     static string[,] userDetails;
 
-    static string userpath = "competitors.csv";
     
   public static void Main (string[] args) {
+
+      competitorPath = "competitors.csv";
+      passwPath = "passw.csv";
+
+
+
+
+      
       if(Login())
       {
           TypeWriter("Entered Details Correctly");
@@ -58,17 +67,17 @@ class Program {
     }
 
 
-    static void ReadInCsv()
+    static void ReadInCsvPass()
     {
 
         // reads in csv file
-        string[] readIn = new string[File.ReadAllLines(path).Length];
+        string[] readIn = new string[File.ReadAllLines(competitorPath).Length];
         int coloums = 2;
         int rows = readIn.Length;
 
         userDetails = new string[rows, coloums];
 
-        readIn = File.ReadAllLines(path);
+        readIn = File.ReadAllLines(competitorPath);
 
         string[] temp = new string[coloums];
 
@@ -81,6 +90,11 @@ class Program {
             }
         }
     }
+
+
+
+
+    
 
 
     static void TypeWriter(string str)
