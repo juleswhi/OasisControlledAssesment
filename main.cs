@@ -7,7 +7,7 @@ class Program {
 
     static string competitorPath, passwPath;
 
-    
+    static string[,] competitorDetails;
     
     static string[,] userDetails;
 
@@ -19,7 +19,6 @@ class Program {
 
 
 
-
       
       if(Login())
       {
@@ -28,15 +27,21 @@ class Program {
       else
       {
           TypeWriter("Entered Details Incorreactly");
+          Environment.Exit(0);
       }
 
+    Thread.Sleep(1000);
 
-      AddCompetitor();
+      MainMenu();
+
+      
+
+
   }
 
     static bool Login()
     {
-        ReadInCsv();
+        ReadInCsvPass();
 
         // read in details
 
@@ -71,13 +76,13 @@ class Program {
     {
 
         // reads in csv file
-        string[] readIn = new string[File.ReadAllLines(competitorPath).Length];
+        string[] readIn = new string[File.ReadAllLines(passwPath).Length];
         int coloums = 2;
         int rows = readIn.Length;
 
         userDetails = new string[rows, coloums];
 
-        readIn = File.ReadAllLines(competitorPath);
+        readIn = File.ReadAllLines(passwPath);
 
         string[] temp = new string[coloums];
 
@@ -93,6 +98,32 @@ class Program {
 
 
 
+    static void ReadInCsvCompetitors()
+    {
+        string[] readIn = new string[File.ReadAllLines(competitorPath).Length];
+        int coluoms = 3;
+        int rows = readIn.Length;
+
+        competitorDetails = new string[rows,coluoms];
+
+        readIn = File.ReadAllLines(competitorPath);
+
+        string[] temp = new string[coluoms];
+
+        for(int i = 0; i < rows; i++)
+        {
+            temp = readIn[i].Split(',');
+            for(int j = 0; j < coluoms; j++)
+            {
+                competitorDetails[i,j] = temp[j];
+            }
+        }
+    }
+
+
+
+
+    // TYPEWRITER METHOD
 
     
 
@@ -107,13 +138,28 @@ class Program {
         Console.WriteLine();
     }
 
+
+
+
+    
+
     static void AddCompetitor()
     {
+
+        Console.Clear();
+
+        Console.Write("> ");
+        string balgkn = Console.ReadLine();
+        Console.Write("> ");
+        string blasPass = Console.ReadLine();
+
+        
         try
         {
-            using(StreamWriter file = new StreamWriter(@userpath, true))
+            using(StreamWriter file = new StreamWriter(@passwPath, true))
             {
                 file.Write("\n");
+                file.Write(balgkn + "," + blasPass);
             }
         }
         catch(Exception E)
@@ -125,5 +171,24 @@ class Program {
     static void MainMenu()
     {
         Console.Clear();
+        Console.WriteLine("Hello, What Would You Like To Do?");
+
+        string[] options = {
+              "Add Competitor", "Exit" 
+        };
+
+        for(int i = 0; i < options.Length; i++)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            if (options[i] != options[options.Length])
+                Console.WriteLine(options[i]);
+            else{
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(options[i]);
+            }
+
+            Thread.Sleep(500);
+                
+        }
     }
 }
