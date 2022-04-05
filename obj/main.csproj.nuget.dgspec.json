@@ -1,26 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/home/runner/OasisControlledAssesment/main.csproj": {}
+    "\\\\wsl$\\kali-linux\\home\\yoshimi\\github\\OasisControlledAssesment\\main.csproj": {}
   },
   "projects": {
-    "/home/runner/OasisControlledAssesment/main.csproj": {
+    "\\\\wsl$\\kali-linux\\home\\yoshimi\\github\\OasisControlledAssesment\\main.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/runner/OasisControlledAssesment/main.csproj",
+        "projectUniqueName": "\\\\wsl$\\kali-linux\\home\\yoshimi\\github\\OasisControlledAssesment\\main.csproj",
         "projectName": "main",
-        "projectPath": "/home/runner/OasisControlledAssesment/main.csproj",
-        "packagesPath": "/home/runner/.nuget/packages/",
-        "outputPath": "/home/runner/OasisControlledAssesment/obj/",
+        "projectPath": "\\\\wsl$\\kali-linux\\home\\yoshimi\\github\\OasisControlledAssesment\\main.csproj",
+        "packagesPath": "C:\\Users\\Callum White\\.nuget\\packages\\",
+        "outputPath": "\\\\wsl$\\kali-linux\\home\\yoshimi\\github\\OasisControlledAssesment\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/runner/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Callum White\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp6.0"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {}
         },
         "frameworks": {
           "net6.0": {
@@ -52,7 +53,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/nix/store/jsm5am5i2b2izvwzbw5h6lk3plvpkrlw-dotnet-sdk-6.0.100/sdk/6.0.100/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

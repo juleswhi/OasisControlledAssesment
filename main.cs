@@ -1,9 +1,12 @@
 using System;
 using System.IO;
-using System.Threading;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+
 
 class Program {
+
 
     static string competitorPath, passwPath;
 
@@ -14,34 +17,18 @@ class Program {
     
   public static void Main (string[] args) {
 
+      Console.Clear();
       competitorPath = "competitors.csv";
       passwPath = "passw.csv";
 
-
-
+      var log = Login();
       
-      if(Login())
-      {
-          TypeWriter("Entered Details Correctly");
-      }
-      else
-      {
-          TypeWriter("Entered Details Incorreactly");
-          Environment.Exit(0);
-      }
-
-    Thread.Sleep(1000);
-
-      MainMenu();
-
-      
-
-
   }
 
-    static bool Login()
+    static async Task Login()
     {
-        ReadInCsvPass();
+        await ReadInCsvPass();
+        await ReadInCsvCompetitors();
 
         // read in details
 
@@ -61,20 +48,24 @@ class Program {
         {
             if(enteredUsername == userDetails[i,0]){
                 if(enteredPassword == userDetails[i,1])
-                    return true;
+                    TypeWriter("Entered Details Correctly");
+                    Thread.Sleep(800);
+                    MainMenu();
             } 
             else {
                 continue;
             }
         }
-        return false;
+        // recursion
+
+        await Login();
         
     }
 
 
-    static void ReadInCsvPass()
+    static async Task ReadInCsvPass()
     {
-
+        try{
         // reads in csv file
         string[] readIn = new string[File.ReadAllLines(passwPath).Length];
         int coloums = 2;
@@ -85,7 +76,7 @@ class Program {
         readIn = File.ReadAllLines(passwPath);
 
         string[] temp = new string[coloums];
-
+        
         for(int i = 0; i < rows; i++)
         {
             temp = readIn[i].Split(',');
@@ -94,22 +85,31 @@ class Program {
                 userDetails[i,j] = temp[j];
             }
         }
+        }
+        catch(Exception e)
+        {
+            throw new FieldAccessException($"oopsie daises {e}");
+        }
+
+       
     }
 
 
 
-    static void ReadInCsvCompetitors()
+    static async Task ReadInCsvCompetitors()
     {
-        string[] readIn = new string[File.ReadAllLines(competitorPath).Length];
-        int coluoms = 3;
-        int rows = readIn.Length;
+        try{
+            string[] readIn = new string[File.ReadAllLines(competitorPath).Length];
+            int coluoms = 3;
+            int rows = readIn.Length;
 
-        competitorDetails = new string[rows,coluoms];
+            competitorDetails = new string[rows,coluoms];
 
-        readIn = File.ReadAllLines(competitorPath);
+            readIn = File.ReadAllLines(competitorPath);
 
-        string[] temp = new string[coluoms];
-
+            string[] temp = new string[coluoms];
+        
+        
         for(int i = 0; i < rows; i++)
         {
             temp = readIn[i].Split(',');
@@ -117,6 +117,11 @@ class Program {
             {
                 competitorDetails[i,j] = temp[j];
             }
+        }
+        }
+        catch(Exception e)
+        {
+            throw new FieldAccessException($"oopsie daises {e}");
         }
     }
 
@@ -133,7 +138,7 @@ class Program {
         for(int i = 0; i < str.Length; i++)
         {
             Console.Write(str[i]);
-            Thread.Sleep(50);
+            Thread.Sleep(30);
         }
         Console.WriteLine();
     }
@@ -143,15 +148,16 @@ class Program {
 
     
 
-    static void AddCompetitor()
+    static void AddUser()
     {
 
         Console.Clear();
-
+        Console.WriteLine("Please Enter Your New Username");
         Console.Write("> ");
-        string balgkn = Console.ReadLine();
+        string NewEnteredUsername  = Console.ReadLine();
+        Console.WriteLine("Please Enter Your New Password");
         Console.Write("> ");
-        string blasPass = Console.ReadLine();
+        string NewEnteredPassword = Console.ReadLine();
 
         
         try
@@ -159,12 +165,12 @@ class Program {
             using(StreamWriter file = new StreamWriter(@passwPath, true))
             {
                 file.Write("\n");
-                file.Write(balgkn + "," + blasPass);
+                file.Write(NewEnteredUsername + "," + NewEnteredPassword);
             }
         }
-        catch(Exception E)
+        catch(Exception e)
         {
-            throw new ArithmeticException("Oopsie Daises " + E);
+            throw new ArithmeticException("Oopsie Daises " + e);
         }
     }
 
@@ -174,21 +180,84 @@ class Program {
         Console.WriteLine("Hello, What Would You Like To Do?");
 
         string[] options = {
-              "Add Competitor", "Exit" 
+              "" , "Add New Username And Password" , "Exit"
         };
 
-        for(int i = 0; i < options.Length; i++)
+        for(int i = 1; i < options.Length; i++)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
-            if (options[i] != options[options.Length])
-                Console.WriteLine(options[i]);
-            else{
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(options[i]);
-            }
 
+            TypeWriter(options[i]);
             Thread.Sleep(500);
                 
         }
+
+        Console.Write("> ");
+        string enteredOption = Console.ReadLine();
+        string spellingCorrected = CheckSpelling(enteredOption, options);
+        if(spellingCorrected == "Add New Username And Password")
+        {
+            AddUser();
+        }
+        else if(spellingCorrected == options[2])
+        {
+            Environment.Exit(0);
+        }
+    }
+
+
+    static int Compare(string s, string t)
+    {
+            // checks that both strings actually have values
+        if(string.IsNullOrEmpty(s))
+        {
+          if(string.IsNullOrEmpty(t))
+          {
+            return 0;
+          }
+          return t.Length;
+        }
+        if(string.IsNullOrEmpty(t))
+          return s.Length;
+        int n = s.Length;
+        int m = t.Length;
+        // creates a 2d array 
+        int[,] d = new int[n + 1, m + 1];
+        // initiales the size of the array
+        for(int i = 0; i <= n; d[i,0] = i++);
+        for(int j = 1; j <= m; d[0,j] = j++);
+        // uses the 'Damereau Levenshein' algorithm to check difference 
+        // between the two strings
+        for(int i = 1; i <= n; i++)
+        {
+          for(int j = 1; j <= m; j++)
+          {
+            int cost = (t[j - 1] == s[i - 1]) ? 0 : 1;
+            int min1 = d[i - 1, j] + 1;
+            int min2 = d[i, j - 1] + 1;
+            int min3 = d[i - 1, j - 1] + cost;
+            d[i, j] = Math.Min(Math.Min(min1, min2), min3);
+          }
+        }
+        // returns an int value based on difference
+        return d[n, m];
+    }
+
+
+    static string CheckSpelling(string input, string[] CorrectString)
+    {
+        string correct = null;
+        int length = CorrectString.Length;
+        for(int i = 0; i < length; i++)
+        {
+            if(Compare(input, CorrectString[i]) < ((CorrectString[i].Length / 4) + 1))
+            {
+                correct = CorrectString[i];
+            }
+            else 
+            {
+                correct = input;
+            }
+        }
+        return correct;
     }
 }
