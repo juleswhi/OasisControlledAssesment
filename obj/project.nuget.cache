@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UrfPyr9xJjRahz6vKxLcWJh2IYsJD7hokvlpJPGRgfSXunJ5a5CtvWGCoYwAw0LEo43i37PFSkuuN/Nw/ZRrDQ==",
+  "dgSpecHash": "0Obhe19kTkftLeKtgeFXpIkAWAR1i6RF2GeSfDTTTobkZlMq8Q3ls3gRXHecVsmILc8RSdO9+JSC8d45KScTsw==",
   "success": true,
-  "projectFilePath": "\\\\wsl$\\kali-linux\\home\\yoshimi\\github\\OasisControlledAssesment\\main.csproj",
+  "projectFilePath": "/home/runner/OasisControlledAssesment/main.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

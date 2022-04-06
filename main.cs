@@ -21,14 +21,19 @@ class Program {
       competitorPath = "competitors.csv";
       passwPath = "passw.csv";
 
+
+    
+    
+      
       var log = Login();
+
+
       
   }
 
     static async Task Login()
     {
         await ReadInCsvPass();
-        await ReadInCsvCompetitors();
 
         // read in details
 
@@ -56,9 +61,8 @@ class Program {
                 continue;
             }
         }
-        // recursion
-
-        await Login();
+        
+        
         
     }
 
@@ -96,7 +100,7 @@ class Program {
 
 
 
-    static async Task ReadInCsvCompetitors()
+    static void ReadInCsvCompetitors()
     {
         try{
             string[] readIn = new string[File.ReadAllLines(competitorPath).Length];
@@ -180,7 +184,7 @@ class Program {
         Console.WriteLine("Hello, What Would You Like To Do?");
 
         string[] options = {
-              "" , "Add New Username And Password" , "Exit"
+              "" , "Add New Username And Password" , "Add New Competitor" , "Exit"
         };
 
         for(int i = 1; i < options.Length; i++)
@@ -198,7 +202,11 @@ class Program {
         {
             AddUser();
         }
-        else if(spellingCorrected == options[2])
+        else if(spellingCorrected == "Add New Competitor")
+        {
+            var competitor = NewCompetitor();
+        }
+        else if(spellingCorrected == "Exit")
         {
             Environment.Exit(0);
         }
@@ -246,10 +254,12 @@ class Program {
     static string CheckSpelling(string input, string[] CorrectString)
     {
         string correct = null;
+        string lInput = input.ToLower();
         int length = CorrectString.Length;
         for(int i = 0; i < length; i++)
         {
-            if(Compare(input, CorrectString[i]) < ((CorrectString[i].Length / 4) + 1))
+            string lCorrect = CorrectString[i].ToLower();
+            if(Compare(input, lCorrect) < ((lCorrect.Length / 3) + 1))
             {
                 correct = CorrectString[i];
             }
@@ -259,5 +269,71 @@ class Program {
             }
         }
         return correct;
+    }
+
+
+    static async Task NewCompetitor()
+    {
+        string newCompetitorFirst;
+        string newCompetitorLast;
+        Console.Clear();
+        Console.WriteLine("Please Enter Your New Competitor Details.");
+        Thread.Sleep(800);
+        Console.WriteLine("Please Enter Your New Competitor's First Name");
+        Console.Write("> ");
+        newCompetitorFirst = Console.ReadLine();
+        Thread.Sleep(500);
+        Console.WriteLine("Please Enter New Competitor Surname");
+        Console.Write("> ");
+        newCompetitorLast = Console.ReadLine();
+
+        
+        ReadInCsvCompetitors();
+        
+
+        // allocate random number
+        
+
+        string allocatedNumber = checkNum();
+
+        Console.WriteLine("Alloacted Number");
+
+
+        var sw = new StreamWriter(@competitorPath, true);
+        
+        try{
+            sw.Write($"\n" + newCompetitorFirst + "," + newCompetitorLast + "," + allocatedNumber);
+           }
+        catch(Exception e)
+        {
+            throw new Exception("oopsie daisesi " + e);
+        }
+
+        Console.WriteLine("Written");
+
+        Thread.Sleep(1000);
+
+        MainMenu();
+        
+    
+              
+    }
+
+    static string checkNum()
+    {
+
+        var random = new Random();
+        
+        string randomAllocated = Convert.ToString(random.Next(0,1000));
+        
+        for(int i =0; i < competitorDetails.Length; i++)
+        {
+            if(randomAllocated == competitorDetails[i,2])
+            {
+                checkNum();
+            }
+        }
+
+        return randomAllocated;
     }
 }

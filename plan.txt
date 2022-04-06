@@ -1,0 +1,5 @@
+separate class handles reaction time tests,
+
+default value is 0
+
+read in data /w await
