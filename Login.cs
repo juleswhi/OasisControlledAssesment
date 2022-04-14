@@ -36,7 +36,7 @@ using System.IO;
 
         private void EnterDetails()
         {
-             Console.Clear();
+            Console.Clear();
             TypeWriter("Please Enter Your Username");
             Console.Write("> ");
             string enteredUsername = Console.ReadLine();
@@ -51,16 +51,23 @@ using System.IO;
             for(int i = 0; i < userDetails.GetLength(0); i++)
             {
                 if(enteredUsername == userDetails[i,0]){
-                    if(enteredPassword == userDetails[i,1])
+                    if(enteredPassword == userDetails[i,1]){
                         TypeWriter("Entered Details Correctly");
                         Thread.Sleep(800);
 
                         runMainMenu();
+                    }
                 } 
                 else {
                     continue;
                 }
             }
+
+            Console.WriteLine("Sorry, You Have Not Entered A Valid Username Or Password");
+            Thread.Sleep(500);
+            Console.WriteLine("Please Try Again");
+            Thread.Sleep(1000);
+            EnterDetails();
         }
 
 
