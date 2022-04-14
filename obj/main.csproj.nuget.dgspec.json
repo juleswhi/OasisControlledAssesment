@@ -1,27 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\OasisControlledAssesment\\main.csproj": {}
+    "/home/runner/OasisControlledAssesment/main.csproj": {}
   },
   "projects": {
-    "C:\\OasisControlledAssesment\\main.csproj": {
+    "/home/runner/OasisControlledAssesment/main.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\OasisControlledAssesment\\main.csproj",
+        "projectUniqueName": "/home/runner/OasisControlledAssesment/main.csproj",
         "projectName": "main",
-        "projectPath": "C:\\OasisControlledAssesment\\main.csproj",
-        "packagesPath": "C:\\Users\\Callum White\\.nuget\\packages\\",
-        "outputPath": "C:\\OasisControlledAssesment\\obj\\",
+        "projectPath": "/home/runner/OasisControlledAssesment/main.csproj",
+        "packagesPath": "/home/runner/.nuget/packages/",
+        "outputPath": "/home/runner/OasisControlledAssesment/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Callum White\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/runner/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
@@ -53,7 +52,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/nix/store/jsm5am5i2b2izvwzbw5h6lk3plvpkrlw-dotnet-sdk-6.0.100/sdk/6.0.100/RuntimeIdentifierGraph.json"
         }
       }
     }

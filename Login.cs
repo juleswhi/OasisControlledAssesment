@@ -66,7 +66,7 @@ using System.IO;
             Console.WriteLine("Sorry, You Have Not Entered A Valid Username Or Password");
             Thread.Sleep(500);
             Console.WriteLine("Please Try Again");
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
             EnterDetails();
         }
 

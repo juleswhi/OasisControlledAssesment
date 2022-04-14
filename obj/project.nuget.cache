@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "z6b98yF/WGc91FdNn+Wvmk0TBX90tFpOUQNu06IakiBDCEq0aIxuJ7S8YCZ2FIVuExzwAnzOIMT/7vC+AdEIfQ==",
+  "dgSpecHash": "0Obhe19kTkftLeKtgeFXpIkAWAR1i6RF2GeSfDTTTobkZlMq8Q3ls3gRXHecVsmILc8RSdO9+JSC8d45KScTsw==",
   "success": true,
-  "projectFilePath": "C:\\OasisControlledAssesment\\main.csproj",
+  "projectFilePath": "/home/runner/OasisControlledAssesment/main.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
