@@ -2,11 +2,15 @@ using System;
 using System.Threading;
 using System.IO;
 
-
-namespace OasisControlledAssesment
-{
     class Login
     {
+
+
+        public static void Main(string[] args)
+        {
+            var login = new Login();
+            login.Run(true);
+        }
 
         public Login() => passwPath = "passw.csv";
 
@@ -23,11 +27,9 @@ namespace OasisControlledAssesment
             }
             else
             {
-
+                AddNewUser();
             }
         }
-
-
 
 
 
@@ -52,13 +54,41 @@ namespace OasisControlledAssesment
                     if(enteredPassword == userDetails[i,1])
                         TypeWriter("Entered Details Correctly");
                         Thread.Sleep(800);
-                        var pro = new Program();
-                        pro.MainMenu();
+
+                        runMainMenu();
                 } 
                 else {
                     continue;
                 }
             }
+        }
+
+
+        public void runMainMenu()
+        {
+            string prompt = "What Would You Like To Do?";
+
+            string[] options = {
+                "Add New Username And Password",
+                "Add New Competitor", "Exit"
+            };
+            var menu = new Menu(prompt, options);
+            int selectedIndex = menu.Run();
+
+            if(selectedIndex == 0)
+            {
+                AddNewUser();
+            }
+            else if(selectedIndex == 1)
+            {
+                Competitors comp = new Competitors();
+                comp.NewCompetitor();
+            }
+            else if(selectedIndex == 2)
+            {
+                Environment.Exit(0);
+            }
+
         }
 
 
@@ -97,10 +127,6 @@ namespace OasisControlledAssesment
 
 
 
-
-
-
-
         private void AddNewUser()
         {
             Console.Clear();
@@ -110,8 +136,8 @@ namespace OasisControlledAssesment
             Console.WriteLine("Please Enter Your New Password");
             Console.Write("> ");
             string NewEnteredPassword = Console.ReadLine();
-    
-            
+
+
             try
             {
                 using(StreamWriter file = new StreamWriter(@passwPath, true))
@@ -130,20 +156,6 @@ namespace OasisControlledAssesment
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         private void TypeWriter(string str)
         {
             for(int i = 0; i < str.Length; i++)
@@ -154,4 +166,3 @@ namespace OasisControlledAssesment
             Console.WriteLine();
         }
     }
-}
