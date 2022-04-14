@@ -6,50 +6,47 @@ using System.Threading;
     class Competitors
     {
 
-        private string competitorPath;
+        private string competitorPath = "competitors.csv";
 
         private string[,] competitorDetails;
 
 
-        public Competitors() => competitorPath = "competitors.csv";
+        public Competitors() => ReadInCsvCompetitors();
 
 
         public void NewCompetitor()
         {
-            string newCompetitorFirst;
-            string newCompetitorLast;
+
+
             Console.Clear();
-            Console.WriteLine("Please Enter Your New Competitor Details.");
-            Thread.Sleep(800);
-            Console.WriteLine("Please Enter Your New Competitor's First Name");
+            Console.WriteLine("Please Enter Your New Competitors' First Name");
             Console.Write("> ");
-            newCompetitorFirst = Console.ReadLine();
-            Thread.Sleep(500);
-            Console.WriteLine("Please Enter New Competitor Surname");
+            string competFirst = Console.ReadLine();
+            Console.WriteLine("Please Enter Your New Competitors' Last Name");
             Console.Write("> ");
-            newCompetitorLast = Console.ReadLine();
+            string competLast = Console.ReadLine();
+            Console.WriteLine("Gotten User Details");
 
-            // allocate random number
-
-
-            string allocatedNumber = checkNum();
-
-            Console.WriteLine("Alloacted Number");
+            string fString = $"{competFirst},{competLast},{checkNum()}";
 
 
-            var sw = new StreamWriter(@competitorPath, true);
-
-            try{
-                sw.Write($"\n" + newCompetitorFirst + "," + newCompetitorLast + "," + allocatedNumber);
-               }
+            Console.WriteLine("Formatted String");
+            try
+            {
+                Console.WriteLine("Trying Streamwriter");
+                using(StreamWriter file = new StreamWriter(@competitorPath, true))
+                {
+                    Console.WriteLine("using StreamWriter");
+                    file.Write("\n");
+                    file.Write(fString);
+                }
+            }
             catch(Exception e)
             {
-                throw new Exception("oopsie daisesi " + e);
+                throw new ArgumentNullException("Oopsie DAises" + e);
             }
 
-            Console.WriteLine("Written");
-
-            Thread.Sleep(1000);
+            Console.WriteLine("Login Method");
             var log = new Login();
             log.runMainMenu();
 
@@ -63,11 +60,13 @@ using System.Threading;
         
             string randomAllocated = Convert.ToString(random.Next(0,1000));
 
-            for(int i =0; i < competitorDetails.Length; i++)
+
+            for(int i =0; i < competitorDetails.GetLength(0); i++)
             {
                 if(randomAllocated == competitorDetails[i,2])
                 {
-                    checkNum();
+                    var comp = new Competitors();
+                    comp.checkNum();
                 }
             }
 

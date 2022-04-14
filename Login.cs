@@ -150,6 +150,9 @@ using System.IO;
             {
                 throw new ArithmeticException("Oopsie Daises " + e);
             }
+
+
+            runMainMenu();
         }
 
 
