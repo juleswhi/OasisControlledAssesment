@@ -10,11 +10,11 @@ class ReactionTime
     private int[] reactionTimes;
 
 
-    public ReactionTime() => () ;
+    public ReactionTime() => ReactionTest();
 
 
 
-    private int[] ReactionTest()
+    private void ReactionTest()
     {
 
         var timer = new Stopwatch();
@@ -54,7 +54,7 @@ class ReactionTime
             WriteLine("Well Done!");
 
             TimeSpan ts = timer.Elapsed;
-            ElapsedTimes[i] = String.Format("{0:00}.{1:00}",
+            ElapsedTimes[i] = String.Format("{0:00}{1:00}",
             ts.Seconds, ts.Milliseconds / 10);
 
             WriteLine($"Your Time Was {ElapsedTimes[i]}!");
@@ -73,13 +73,15 @@ class ReactionTime
 
         }
 
+        reactionTimes = new int[3];
+
         for(int j = 0; j < ElapsedTimes.Length; j++)
         {
-
+            reactionTimes[j] = Convert.ToInt16(ElapsedTimes[j]);
         }
 
-
-        return null;
+        LogTestTimes();
+        
     }
 
 
@@ -87,7 +89,7 @@ class ReactionTime
 
     private void LogTestTimes()
     {
-
+        // logs
     }
 
 }
