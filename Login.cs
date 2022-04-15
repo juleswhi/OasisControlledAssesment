@@ -77,7 +77,7 @@ using System.IO;
 
             string[] options = {
                 "Add New Username And Password",
-                "Add New Competitor", "Exit"
+                "Add New Competitor", "Take Reaction Time Test" ,"Exit"
             };
             var menu = new Menu(prompt, options);
             int selectedIndex = menu.Run();
@@ -92,6 +92,10 @@ using System.IO;
                 comp.NewCompetitor();
             }
             else if(selectedIndex == 2)
+            {
+                var rt = new ReactionTime();
+            }
+            else if(selectedIndex == 3)
             {
                 Environment.Exit(0);
             }

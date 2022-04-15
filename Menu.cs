@@ -20,12 +20,12 @@ using static System.Console;
                     "Add New Competitor", "Exit"
                 };
             }
-
-
-
-            Prompt = prompt;
-            Options = options;
-            SelectedIndex = 0;
+            else
+            {
+                Prompt = prompt;
+                Options = options;
+                SelectedIndex = 0;
+            }
         }
 
 
