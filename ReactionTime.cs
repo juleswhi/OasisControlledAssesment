@@ -10,7 +10,7 @@ class ReactionTime
     private int[] reactionTimes;
 
 
-    public ReactionTime() => reactionTimes = ReactionTest();
+    public ReactionTime() => () ;
 
 
 
@@ -24,6 +24,7 @@ class ReactionTime
 
         for(int i = 0; i < 3; i++)
         {
+            ResetColor();
             Clear();
             WriteLine("Reaction Time Test Is About To Commence");
             Thread.Sleep(1500);
@@ -67,8 +68,13 @@ class ReactionTime
             else
             {
                 WriteLine("Press Any Key To Finish");
-                LogTestTimes();
+                break;
             }
+
+        }
+
+        for(int j = 0; j < ElapsedTimes.Length; j++)
+        {
 
         }
 
