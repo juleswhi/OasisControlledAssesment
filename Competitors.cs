@@ -10,13 +10,19 @@ using System.Threading;
 
         private string[,] competitorDetails;
 
+        public bool dataAccessed
+        {get; set;}
+
 
         public Competitors() => ReadInCsvCompetitors();
 
-
+        public string[,] getCompetitorDetails()
+        {
+            return competitorDetails;
+        }
         public void NewCompetitor()
         {
-
+            
 
             Console.Clear();
             Console.WriteLine("Please Enter Your New Competitors' First Name");
@@ -79,7 +85,7 @@ using System.Threading;
 
 
 
-        private void ReadInCsvCompetitors()
+        protected void ReadInCsvCompetitors()
         {
                try{
                string[] readIn = new string[File.ReadAllLines(competitorPath).Length];

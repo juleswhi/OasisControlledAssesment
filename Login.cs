@@ -89,6 +89,7 @@ using System.IO;
             else if(selectedIndex == 1)
             {
                 Competitors comp = new Competitors();
+                comp.dataAccessed = true;
                 comp.NewCompetitor();
             }
             else if(selectedIndex == 2)

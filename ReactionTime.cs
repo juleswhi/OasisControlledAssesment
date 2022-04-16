@@ -4,7 +4,7 @@ using static System.Console;
 using System.Threading;
 // using System.Threading.Tasks;
 
-class ReactionTime
+class ReactionTime : Competitors
 {
 
     private int[] reactionTimes;
@@ -89,7 +89,20 @@ class ReactionTime
 
     private void LogTestTimes()
     {
-        // logs
+
+         if(dataAccessed != true)
+         {
+             ReadInCsvCompetitors();
+         }
+
+        string[,] competitorDetails = getCompetitorDetails();
+
+        string[,] reactionCompetitorDetails = new string[competitorDetails.GetLength(0),5];
+
+            
+
+
+
     }
 
 }
